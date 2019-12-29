@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+            body {
+              margin: 0;
+              padding: 0;
+              width: 100vw;
+              height: 100vh;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            }
+        
+            canvas {
+              position: absolute;
+            }
+            #canvas{
+                display: none;
+            }
+            input{
+                display: none;
+            }
+          </style>
+</head>
+<body>
+    <div>
+    <video id='video' width="811" height="657"  autoplay></video>
+    <form id="gui" action="control" method="post">
+        <input type="hidden" id="input" name="anh">
+    <button onclick="test()">test</button>
+    </form>
+    <canvas id="canvas"  width="811" height="657" ></canvas>
+    </div>
+    <script  src="face-api.min.js"></script>
+    <script  src="script.js"></script>
+    <script>
+        function test(){
+        var canvas=document.getElementById('canvas');
+        canvas.style.display='none';
+        var context=canvas.getContext('2d');
+        context.drawImage(video,0,0,811,657);
+        data=canvas.toDataURL("image/jpeg").toString();
+        console.log(data);
+ document.getElementById('input').value=data;
+ 
+   document.getElementById('gui').submit();
+//   $.ajax({
+//            type: "POST",
+//            url: "/control",
+//            data: {
+//                imgBase64: data
+//            }
+//            // Sau khi gửi dữ liệu thành công thì sẽ thêm nút Đi tới link ảnh 
+//        }).done(function (result) {
+//           
+//        });
+//  
+     
+    }
+    </script>
+  </body>
+</html>
